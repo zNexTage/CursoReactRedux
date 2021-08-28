@@ -1,0 +1,32 @@
+Anotações
+
+
+18. React Fragment
+    - É necessário ter uma tag envolvendo todos os componentes
+     <React.Fragment>
+            <h2>Fragmento</h2>
+            <p>Cuidado com esse erro!!</p>
+    </React.Fragment>
+    Ou
+    <>
+        <h2>Fragmento</h2>
+        <p>Cuidado com esse erro!!</p>
+    </>
+
+    - A diferença é que com o React.Fragment é possível utilizar propriedades
+
+26. Componentes com Filho
+    - Passando as props de um componente pai para o filho utilizando props.children
+        - Necessário utilizar o React.cloneElement
+            - React.cloneElement(elemento, props)
+            - React.cloneELement só consegue clonar um elemento
+    {React.cloneElement(props.children, { ...props })}
+
+    - Clonando vários elementos passados via props.children
+    React.Children.map(props.children, (elemento)=> {
+        return React.cloneElement(elemento, { ...props })
+    })
+
+
+27. Repetição
+    Key - Auxilia o React a identificar qual componente sofreu mutação.
