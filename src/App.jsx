@@ -13,6 +13,9 @@ import ParOuImpar from './components/condicional/ParOuImpar';
 import UsuarioInfo from './components/condicional/UsuarioInfo';
 import DiretaPai from './components/comunicacao/DiretaPai';
 import IndiretaPai from './components/comunicacao/IndiretaPai';
+import Input from './components/formulario/Input';
+import Contador from './components/contador/Contador';
+import Mega from './components/mega/Mega';
 
 const App = (props) => {
     return (
@@ -20,6 +23,18 @@ const App = (props) => {
             <h1>Fundamentos React</h1>
 
             <article className="Cards">
+                <Card titulo="#13 - Desafio Mega" color="#424242">
+                    <Mega totalNumeros={5} />
+                </Card>
+
+                <Card titulo="#12 - Contador" color="#424242">
+                    <Contador numeroInicial={10} />
+                </Card>
+
+                <Card titulo="#11 - Componente Controlado" color="#E45F56">
+                    <Input />
+                </Card>
+
                 <Card titulo="#10 - Comunicação Indireta" color="#322e2f">
                     <IndiretaPai />
                 </Card>
