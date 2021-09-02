@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import PageTitle from '../../components/layout/PageTitle'
 import SectionTitle from '../../components/layout/SectionTitle'
 
-const merge = (strOne, strTwo) => {
-    return strOne + strTwo;
-}
+const merge = (strOne, strTwo) => [...strOne].map((str, i) => `${str}-${strTwo[i] || ""}`).join("");
 
 const UseRef = props => {
     //Ex 01
