@@ -1,0 +1,9 @@
+.Interval input{
+    font-size: 1.8rem;
+    margin-left: 20px;
+    width: 100px;
+}
+
+.Interval span{
+    display: block;
+}
