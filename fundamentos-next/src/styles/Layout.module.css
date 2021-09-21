@@ -1,0 +1,30 @@
+.Layout{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.Header{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #777;
+}
+
+.Header > a {
+    font-size: 1.25em;
+    background-color: crimson;
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+
+.Header h1{
+    margin: 0;
+    font-size: 1.4rem;
+}
+
+.Content{
+    padding: 25px;
+    height: 100%;
+}
+
