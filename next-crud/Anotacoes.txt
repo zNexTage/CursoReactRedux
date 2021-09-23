@@ -1,0 +1,8 @@
+Atributos privados
+
+Necessário utilizar a versão ES2015
+
+    A cerquilha deixa os atributos privados
+    #id: string;
+    #name: string;
+    #age: number;
