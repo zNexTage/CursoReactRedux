@@ -5,6 +5,8 @@ import Input from './Input';
 
 interface IFormProps {
     customer: Customer;
+    onCancelClick?: () => void;
+    onSaveClick?: (customer: Customer) => void;
 }
 
 const Form = (props: IFormProps) => {
@@ -13,8 +15,16 @@ const Form = (props: IFormProps) => {
     const [name, setName] = useState(props.customer?.name ?? '');
     const [age, setAge] = useState(props.customer?.age ?? 0);
 
+    const onSubmit = event => {
+        event.preventDefault();
+
+        const customer = new Customer({ name, age, id });
+
+        props?.onSaveClick(customer);
+    }
+
     return (
-        <form>
+        <form onSubmit={onSubmit}>
             {id &&
                 <Input
                     readonly
@@ -32,14 +42,17 @@ const Form = (props: IFormProps) => {
             <Input
                 labelText="Idade"
                 value={age}
-                onChange={value => setAge(value)}
+                onChange={value => setAge(Number.parseInt(value))}
                 id="txtAge" />
 
             <div className='flex justify-end mt-7'>
-                <Button color='blue' className='mr-2'>
+                <Button
+                    type='submit'
+                    color='blue'
+                    className='mr-2'>
                     {id ? 'Alterar' : 'Salvar'}
                 </Button>
-                <Button >
+                <Button onClick={props.onCancelClick}>
                     Cancelar
                 </Button>
             </div>
