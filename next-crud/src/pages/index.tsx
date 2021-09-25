@@ -1,3 +1,5 @@
+import Button from '../components/Button'
+import Form from '../components/Form'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
 import Customer from '../Model/Customer'
@@ -26,6 +28,14 @@ export default function Home() {
     text-white
     `}>
       <Layout title='Cadastro Simples'>
+        <div className={`flex justify-end`}>
+          <Button
+            color='green'
+            className={`mb-4`}>
+            Novo Cliente
+          </Button>
+        </div>
+        <Form customer={customers[1]} />
         <Table
           onCustomerSelected={onCustomerSelected}
           onCustomerDeleted={onCustomerDeleted}
