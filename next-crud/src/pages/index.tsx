@@ -1,35 +1,49 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import CustomerCollection from '../backend/CustomerColletion'
 import Button from '../components/Button'
 import Form from '../components/Form'
 import Layout from '../components/Layout'
 import Table from '../components/Table'
 import Customer from '../model/Customer'
+import ICustomerRepository from '../repositories/CustomerRepository'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const repo: ICustomerRepository = new CustomerCollection();
+
   const [visible, setVisible] = useState<'table' | 'form'>('table');
 
   const [customer, setCustomer] = useState<Customer>(Customer.EmptyCustomer());
+  const [customers, setCustomers] = useState<Customer[]>([]);
 
 
-  const customers = [
-    new Customer({ name: 'Ana', age: 34, id: '1' }),
-    new Customer({ name: 'Bia', age: 45, id: '2' }),
-    new Customer({ name: 'Carlos', age: 23, id: '3' }),
-    new Customer({ name: 'Pedro', age: 54, id: '4' }),
-  ]
+  const findAll = () => {
+    repo.findAll()
+      .then(customers => {
+        setCustomers(customers);
+        showTable();
+      })
+      .catch(err => {
+        console.log(err);
+        alert('Ocorreu um erro....');
+      });
+  }
+
+  useEffect(() => { findAll(); }, []);
 
   const onCustomerSelected = (customer: Customer) => {
     setCustomer(customer);
     showForm();
   }
 
-  const onCustomerDeleted = (customer: Customer) => {
-
+  const onCustomerDeleted = async (customer: Customer) => {
+    await repo.delete(customer);
+    findAll();
   }
 
-  const saveCustomer = (customer: Customer) => {
-    showTable();
+  const saveCustomer = async (customer: Customer) => {
+    await repo.save(customer);
+    findAll();
   }
 
   const showForm = () => setVisible('form');
