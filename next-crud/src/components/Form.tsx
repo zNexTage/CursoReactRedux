@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Customer from '../Model/Customer';
+import Customer from '../model/Customer';
 import Button from './Button';
 import Input from './Input';
 

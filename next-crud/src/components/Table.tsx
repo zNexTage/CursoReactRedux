@@ -1,4 +1,4 @@
-import Customer from "../Model/Customer";
+import Customer from "../model/Customer";
 import { Edit, Trash } from "./Icons";
 
 interface ITableProps {
