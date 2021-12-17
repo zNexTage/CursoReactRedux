@@ -1,0 +1,5 @@
+ol {
+    list-style-type: upper-roman;
+    list-style-position: inside;
+    text-align: center;
+}
