@@ -2,9 +2,11 @@ import IconButton from '../Buttons/IconButton';
 import Grid from '../Grid';
 import style from './style.module.css';
 
-const TodoForm = () => {
+const TodoForm = ({ onSubmit }) => {
     return (
-        <form className="todoForm">
+        <form
+            onSubmit={onSubmit}
+            className="todoForm">
 
             <fieldset>
                 <legend>
@@ -21,6 +23,7 @@ const TodoForm = () => {
                         <input
                             id="txtDescription"
                             type="text"
+                            name='description'
                             className="form-control" />
                     </Grid>
 
@@ -32,7 +35,6 @@ const TodoForm = () => {
                         <IconButton
                             buttonClass={'primary'}
                             icon={'plus'}
-
                         />
                     </Grid>
 
