@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header';
 import TodoForm from '../TodoForm';
 import TodoList from '../TodoList';
@@ -21,14 +21,40 @@ const Todo = () => {
         }
 
         try {
-            await axios.post(URL, { description });
+            const { data } = await axios.post(URL, { description });
 
-            console.log('funfou')
+            setTodoList([...todoList, data]);
         }
         catch (err) {
             console.log('não funfou');
         }
     }
+
+    const getTodos = async () => {
+        try {
+            const { data } = await axios.get(`${URL}?sort=-created_at`);
+
+            setTodoList([...data]);
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleRemove = async (todo) => {
+        try {
+            await axios.delete(`${URL}/${todo._id}`);
+
+            const todoListAux = todoList.filter(({ _id }) => _id !== todo._id);
+
+            setTodoList([...todoListAux]);
+        }
+        catch (err) {
+            console.log(err);
+        }
+    }
+
+    useEffect(() => getTodos(), []);
 
     return (
         <div>
@@ -41,7 +67,10 @@ const Todo = () => {
                 onSubmit={onAddSubmit}
             />
 
-            <TodoList />
+            <TodoList
+                handleRemove={handleRemove}
+                list={todoList}
+            />
         </div>
     )
 }
