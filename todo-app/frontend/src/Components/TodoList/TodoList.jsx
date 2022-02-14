@@ -1,6 +1,7 @@
 import IconButton from "../Buttons/IconButton";
+import style from './TodoList.module.css';
 
-const TodoList = ({ list = [], handleRemove }) => {
+const TodoList = ({ list = [], handleRemove, handleMarkAsDone, handleMarkAsPending }) => {
 
     return (
         <table className="table">
@@ -17,13 +18,26 @@ const TodoList = ({ list = [], handleRemove }) => {
             <tbody>
                 {list.map(todo => (
                     <tr key={todo._id}>
-                        <td>
+                        <td className={todo.done ? style.MarkedAsDone : ''}>
                             {todo.description}
                         </td>
                         <td>
                             <IconButton
+                                hide={todo.done}
+                                buttonClass={`success ${style.Button}`}
+                                icon='check'
+                                onClick={() => handleMarkAsDone && handleMarkAsDone(todo)}
+                            />
+                            <IconButton
+                                hide={!todo.done}
+                                buttonClass={`warning ${style.Button}`}
+                                icon='undo'
+                                onClick={() => handleMarkAsPending && handleMarkAsPending(todo)}
+                            />
+                            <IconButton
+                                hide={!todo.done}
                                 onClick={() => handleRemove && handleRemove(todo)}
-                                buttonClass={'danger'} icon={'trash'} />
+                                buttonClass={`danger ${style.Button}`} icon={'trash'} />
                         </td>
                     </tr>
                 ))}

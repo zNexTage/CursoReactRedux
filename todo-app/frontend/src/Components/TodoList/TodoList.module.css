@@ -1,0 +1,8 @@
+.MarkedAsDone {
+    text-decoration: line-through;
+    color: #777;
+}
+
+.Button {
+    margin: 0 5px;
+}

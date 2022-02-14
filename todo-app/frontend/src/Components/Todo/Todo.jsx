@@ -54,6 +54,24 @@ const Todo = () => {
         }
     }
 
+    const handleMarkAsDone = async (todo) => {
+        await axios.put(`${URL}/${todo._id}`, {
+            ...todo,
+            done: true
+        });
+
+        getTodos();
+    }
+
+    const handleMarkAsPeding = async (todo) => {
+        await axios.put(`${URL}/${todo._id}`, {
+            ...todo,
+            done: false
+        });
+
+        getTodos();
+    }
+
     useEffect(() => getTodos(), []);
 
     return (
@@ -68,6 +86,8 @@ const Todo = () => {
             />
 
             <TodoList
+                handleMarkAsDone={handleMarkAsDone}
+                handleMarkAsPending={handleMarkAsPeding}
                 handleRemove={handleRemove}
                 list={todoList}
             />
