@@ -4,17 +4,12 @@ import TodoForm from '../TodoForm';
 import TodoList from '../TodoList';
 import axios from 'axios';
 import { URL } from '../../Util/Endpoint';
+import StringBuilder from '../../Builders/StringBuilder';
 
 const Todo = () => {
     const [todoList, setTodoList] = useState([]);
 
-    const onAddSubmit = async (event) => {
-        event.preventDefault();
-
-        const formData = new FormData(event.target);
-
-        const description = formData.get('description');
-
+    const onAddSubmit = async (description) => {
         if (!description.trim()) {
             alert('Informe a descrição!');
             return;
@@ -30,15 +25,25 @@ const Todo = () => {
         }
     }
 
-    const getTodos = async () => {
+    const getTodos = async (description = '') => {
         try {
-            const { data } = await axios.get(`${URL}?sort=-created_at`);
+            const urlApi = new StringBuilder(`${URL}?sort=-created_at`);
+
+            const search = description ? `&description__regex=/${description}/` : '';
+
+            urlApi.append(search);
+
+            const { data } = await axios.get(urlApi.toString());
 
             setTodoList([...data]);
         }
         catch (err) {
             console.log(err)
         }
+    }
+
+    const onSearchSubmit = description => {
+        getTodos(description);
     }
 
     const handleRemove = async (todo) => {
@@ -82,7 +87,8 @@ const Todo = () => {
             />
 
             <TodoForm
-                onSubmit={onAddSubmit}
+                onAddSubmit={onAddSubmit}
+                onSearchSubmit={onSearchSubmit}
             />
 
             <TodoList

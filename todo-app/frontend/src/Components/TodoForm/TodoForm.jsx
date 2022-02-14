@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import IconButton from '../Buttons/IconButton';
 import Grid from '../Grid';
 import style from './style.module.css';
 
-const TodoForm = ({ onSubmit }) => {
+const TodoForm = ({ onAddSubmit, onSearchSubmit }) => {
+    const [description, setDescription] = useState();
+
+
+    const handleDescription = event => setDescription(event.target.value);
+
     return (
         <form
-            onSubmit={onSubmit}
             className="todoForm">
 
             <fieldset>
@@ -24,6 +29,8 @@ const TodoForm = ({ onSubmit }) => {
                             id="txtDescription"
                             type="text"
                             name='description'
+                            onChange={handleDescription}
+                            value={description}
                             className="form-control" />
                     </Grid>
 
@@ -35,6 +42,20 @@ const TodoForm = ({ onSubmit }) => {
                         <IconButton
                             buttonClass={'primary'}
                             icon={'plus'}
+                            onClick={event => {
+                                event.preventDefault();
+
+                                onAddSubmit(description);
+                            }}
+                        />
+                        <IconButton
+                            buttonClass={'info'}
+                            icon={'search'}
+                            onClick={event => {
+                                event.preventDefault();
+
+                                onSearchSubmit(description);
+                            }}
                         />
                     </Grid>
 
