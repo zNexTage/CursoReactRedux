@@ -15,7 +15,6 @@ const Grid = ({ lg, md, sm, xs, children }) => {
                 classes.append(` ${className}`);
             }
         });
-        console.log(classes.toString());
 
         return classes.toString();
     }

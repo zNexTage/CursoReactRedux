@@ -3,7 +3,7 @@ import IconButton from '../Buttons/IconButton';
 import Grid from '../Grid';
 import style from './style.module.css';
 
-const TodoForm = ({ onAddSubmit, onSearchSubmit }) => {
+const TodoForm = ({ onAddSubmit, onSearchSubmit, onClearClick }) => {
     const [description, setDescription] = useState();
 
 
@@ -11,7 +11,7 @@ const TodoForm = ({ onAddSubmit, onSearchSubmit }) => {
 
     return (
         <form
-            className="todoForm">
+            className={style.TodoForm}>
 
             <fieldset>
                 <legend>
@@ -40,7 +40,8 @@ const TodoForm = ({ onAddSubmit, onSearchSubmit }) => {
                         md={2}
                     >
                         <IconButton
-                            buttonClass={'primary'}
+                            type='button'
+                            buttonClass={'primary m-2'}
                             icon={'plus'}
                             onClick={event => {
                                 event.preventDefault();
@@ -49,12 +50,24 @@ const TodoForm = ({ onAddSubmit, onSearchSubmit }) => {
                             }}
                         />
                         <IconButton
+                            type='button'
                             buttonClass={'info'}
                             icon={'search'}
                             onClick={event => {
                                 event.preventDefault();
 
                                 onSearchSubmit(description);
+                            }}
+                        />
+
+                        <IconButton
+                            type='button'
+                            buttonClass={'danger'}
+                            icon={'close'}
+                            onClick={event => {
+                                event.preventDefault();
+                                setDescription('');
+                                onClearClick();
                             }}
                         />
                     </Grid>

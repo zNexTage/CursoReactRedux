@@ -10,7 +10,7 @@ const TodoList = ({ list = [], handleRemove, handleMarkAsDone, handleMarkAsPendi
                     <th>
                         Descrição
                     </th>
-                    <th>
+                    <th className="tableActions">
                         Ações
                     </th>
                 </tr>

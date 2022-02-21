@@ -77,6 +77,10 @@ const Todo = () => {
         getTodos();
     }
 
+    const handleClear = () => {
+        getTodos();
+    }
+
     useEffect(() => getTodos(), []);
 
     return (
@@ -89,6 +93,7 @@ const Todo = () => {
             <TodoForm
                 onAddSubmit={onAddSubmit}
                 onSearchSubmit={onSearchSubmit}
+                onClearClick={handleClear}
             />
 
             <TodoList
